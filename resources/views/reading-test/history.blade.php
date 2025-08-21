@@ -93,7 +93,7 @@
                         data: "student.name",
                         defaultContent: "--",
                         mRender: function(data, type, full) {
-                            return `<a href="/admin/history/answere/${full.id}">
+                            return `<a href="/lexile-2/admin/history/answere/${full.id}">
                                 ${data}<br>
                                 <small>${full.student.email}</small><br>
                                 <small>Grade ${full.grade}</small>
@@ -156,8 +156,8 @@
                     {
                         data: "id",
                         defaultContent: "--",
-                        mRender: function() {
-                            return `<a href="" class="btn btn-sm btn-primary btn-show"><i class="far fa-eye"></i></a>`
+                        mRender: function(data,full,type) {
+                            return `<a href="/lexile-2/admin/history/answere/${data}" class="btn btn-sm btn-primary btn-show"><i class="far fa-eye"></i></a>`
                         }
                     },
                 ]
@@ -204,7 +204,7 @@
             });
             let gradeId = $('#grade').val();
             let subject = $('#subject').val();
-            window.location.href = `/export-answer/${gradeId}/${subject}`;
+            window.location.href = `/lexile-2/export-answer/${gradeId}/${subject}`;
             $('.row-table').LoadingOverlay("hide");
         }
     </script>

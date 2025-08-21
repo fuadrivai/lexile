@@ -33,10 +33,10 @@
         <div class="container-fluid h-custom">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-md-9 col-lg-6 col-xl-5">
-                    <img src="/images/logo-mh.png" class="img-fluid" class="img-fluid" alt="Sample image">
+                    <img src="/lexile-2/images/logo-mh.png" class="img-fluid" class="img-fluid" alt="Sample image">
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                    <form autocomplete="on" id="form-login" action="/login" method="POST">
+                    <form autocomplete="on" id="form-login" action="/lexile-2/login" method="POST">
                         @csrf
                         <div class="form-outline mb-4">
                             <label class="form-label" for="email">Email address</label>

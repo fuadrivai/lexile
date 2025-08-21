@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>MHIS - Reading Assessment</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
-    <link rel="icon" href="/assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/lexile-2/assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
 
     <!-- Fonts and icons -->
-    <script src="/assets/js/plugin/webfont/webfont.min.js"></script>
+    <script src="/lexile-2/assets/js/plugin/webfont/webfont.min.js"></script>
     <script>
         WebFont.load({
             google: {
@@ -21,7 +21,7 @@
                     "Font Awesome 5 Brands",
                     "simple-line-icons",
                 ],
-                urls: ["/assets/css/fonts.min.css"],
+                urls: ["/lexile-2/assets/css/fonts.min.css"],
             },
             active: function() {
                 sessionStorage.fonts = true;
@@ -30,9 +30,9 @@
     </script>
 
     <!-- CSS Files -->
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/assets/css/plugins.min.css" />
-    <link rel="stylesheet" href="/assets/css/kaiadmin.min.css" />
+    <link rel="stylesheet" href="/lexile-2/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/lexile-2/assets/css/plugins.min.css" />
+    <link rel="stylesheet" href="/lexile-2/assets/css/kaiadmin.min.css" />
     @yield('content-class')
 </head>
 
@@ -43,8 +43,8 @@
             <div class="sidebar-logo">
                 <!-- Logo Header -->
                 <div class="logo-header" data-background-color="dark">
-                    <a href="/" class="logo">
-                        <img src="/assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand"
+                    <a href="/lexile-2/admin" class="logo">
+                        <img src="/lexile-2/assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand"
                             height="20" />
                     </a>
                     <div class="nav-toggle">
@@ -65,7 +65,7 @@
                 <div class="sidebar-content">
                     <ul class="nav nav-secondary">
                         <li class="nav-item active">
-                            <a data-bs-toggle="collapse" href="/admin" class="collapsed" aria-expanded="false">
+                            <a data-bs-toggle="collapse" href="/lexile-2/admin" class="collapsed" aria-expanded="false">
                                 <i class="fas fa-home"></i>
                                 <p>Dashboard</p>
                             </a>
@@ -77,13 +77,13 @@
                             <h4 class="text-section">Components</h4>
                         </li>
                         <li class="nav-item">
-                            <a href="/admin/history">
+                            <a href="/lexile-2/admin/history">
                                 <i class="fas fa-users"></i>
                                 <p>Test History</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/admin/passage">
+                            <a href="/lexile-2/admin/passage">
                                 <i class="fas fa-question-circle"></i>
                                 <p>Passage</p>
                             </a>
@@ -122,7 +122,7 @@
                     <!-- Logo Header -->
                     <div class="logo-header" data-background-color="dark">
                         <a href="index.html" class="logo">
-                            <img src="/assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand"
+                            <img src="/lexile-2/assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand"
                                 height="20" />
                         </a>
                         <div class="nav-toggle">
@@ -147,7 +147,7 @@
                                 <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#"
                                     aria-expanded="false">
                                     <div class="avatar-sm">
-                                        <img src="/assets/img/profile.jpg" alt="..."
+                                        <img src="/lexile-2/assets/img/profile.jpg" alt="..."
                                             class="avatar-img rounded-circle" />
                                     </div>
                                     <span class="profile-username">
@@ -160,7 +160,7 @@
                                         <li>
                                             <div class="user-box">
                                                 <div class="avatar-lg">
-                                                    <img src="/assets/img/profile.jpg" alt="image profile"
+                                                    <img src="/lexile-2/assets/img/profile.jpg" alt="image profile"
                                                         class="avatar-img rounded" />
                                                 </div>
                                                 <div class="u-text">
@@ -172,7 +172,7 @@
                                         <li>
                                             <a class="dropdown-item" href="#">Account Setting</a>
                                             <div class="dropdown-divider"></div>
-                                            <form action="/logout" method="POST">
+                                            <form action="/lexile-2/logout" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="dropdown-item">Logout</button>
@@ -205,16 +205,16 @@
         <!-- End Custom template -->
     </div>
     <!--   Core JS Files   -->
-    <script src="/assets/js/core/jquery-3.7.1.min.js"></script>
-    <script src="/assets/js/core/popper.min.js"></script>
-    <script src="/assets/js/core/bootstrap.min.js"></script>
+    <script src="/lexile-2/assets/js/core/jquery-3.7.1.min.js"></script>
+    <script src="/lexile-2/assets/js/core/popper.min.js"></script>
+    <script src="/lexile-2/assets/js/core/bootstrap.min.js"></script>
 
     <!-- jQuery Scrollbar -->
-    <script src="/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+    <script src="/lexile-2/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
 
     <!-- Kaiadmin JS -->
-    <script src="/assets/js/kaiadmin.min.js"></script>
-    <script src="/assets/js/core/script.js"></script>
+    <script src="/lexile-2/assets/js/kaiadmin.min.js"></script>
+    <script src="/lexile-2/assets/js/core/script.js"></script>
 
     @yield('content-script')
 </body>

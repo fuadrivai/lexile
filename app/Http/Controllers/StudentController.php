@@ -38,7 +38,8 @@ class StudentController extends Controller
         );
         session(['id' => $student->id]);
         session(['grade' => $request['grade']]);
-        return redirect()->route('student.assessment');
+        return redirect("/assessment");
+        return 'ok';
     }
 
     /**

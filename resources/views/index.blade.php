@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MHIS Assessment</title>
     <!-- Bootstrap 5 CSS -->
@@ -159,7 +160,7 @@
                     <i class="fas fa-hand-wave me-2"></i> Welcome to MHIS Assessment! We're glad you're here.
                 </div>
 
-                <form id="mhisForm" novalidate method="POST" action="/">
+                <form id="mhisForm" novalidate method="POST" action="/lexile-2/">
                     @csrf
                     <div class="mb-4">
                         <label for="nameInput" class="form-label fw-bold required-field">Full Name</label>
