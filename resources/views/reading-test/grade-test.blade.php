@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reading Test - Grade {{ $grade }}</title>
+    <title>Assessment - Grade {{ $grade }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -54,24 +54,14 @@
         .result-box {
             margin-top: 30px;
         }
-
-        #introForm {
-            max-width: 500px;
-            margin: 60px auto;
-            padding: 30px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
     </style>
 </head>
 
-<body>
-
-    <div class="container" id="mainContent" style="display: none;">
+<body id="mainContent">
+    <div class="container">
         <div class="passage-box">
             <h4>Topic: <span id="topic"></span></h4>
-            <p><strong>Lexile Level:</strong> <span id="lexile-level"></span> L</p>
+            <p class="lexile-level"><strong>Lexile Level:</strong> <span id="lexile-level"></span> L</p>
             <hr>
             <p id="passage" style="text-align: justify"></p>
         </div>
@@ -91,27 +81,17 @@
         </div>
     </div>
 
-    <div id="introForm">
-        <h3 class="mb-4">Start Reading Test - Grade {{ $grade }}</h3>
-        <form id="startForm">
-            <div class="mb-3">
-                <label for="studentName" class="form-label">Your Name</label>
-                <input type="text" class="form-control" id="studentName" required>
-            </div>
-            <div class="mb-3">
-                <label for="studentEmail" class="form-label">Email</label>
-                <input type="email" class="form-control" id="studentEmail" required>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Start Test</button>
-        </form>
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="/assets/js/plugin/webfont/webfont.min.js"></script>
+    <script src="/assets/js/plugin/jquery-loading-overlay/loadingoverlay.min.js"></script>
     <script>
         let allQuestions = [];
         let currentPage = 1;
         const perPage = 5;
         let userAnswers = {};
+        let passage_id = {{ $passage_id }};
+        let student_id = {{ $student_id }};
         let passage = null;
         let timerInterval;
         let answers = {
@@ -120,13 +100,7 @@
 
         let grade = {{ $grade }};
         $(document).ready(function() {
-            $('#startForm').on('submit', function(e) {
-                e.preventDefault();
-                $('#introForm').hide();
-                startTimer();
-                $('#mainContent').show();
-                // renderQuestions(currentPage);
-            });
+            getQuestion();
 
             $('#prev').on('click', function() {
                 currentPage--;
@@ -158,15 +132,23 @@
                     detail.selected_option_text = question[`option_${$(this).val().toLowerCase()}`];
                 }
             })
-            // Fetch questions from the API
+        });
+
+        function getQuestion() {
+            $('#mainContent').LoadingOverlay("show", {
+                image: "",
+                fontawesome: "fa fa-cog fa-spin",
+                background: "rgba(165, 190, 100, 0.5)"
+            });
             $.ajax({
-                url: `/api/grade/${grade}/question`,
+                url: `/api/grade/question/${passage_id}`,
                 method: 'GET',
                 dataType: 'json',
                 success: function(data) {
                     passage = data;
-                    $('topic').text(data.topic);
+                    $('#topic').text(data.topic);
                     $('#lexile-level').text(data.lexile_level);
+                    $('.lexile-level').addClass(data.subject == "math" ? "d-none" : "");
                     $('#passage').text(data.passage);
                     allQuestions = data.questions;
                     if (allQuestions.length === 0) {
@@ -174,13 +156,16 @@
                         return;
                     }
                     renderQuestions()
+                    $('#mainContent').LoadingOverlay("hide");
+                    startTimer();
                 },
                 error: function(xhr, status, error) {
                     console.error("Error fetching questions:", error);
                     alert("Failed to load questions. Please try again later.");
+                    $('#mainContent').LoadingOverlay("hide");
                 }
             });
-        });
+        }
 
         function renderQuestions() {
             const start = (currentPage - 1) * perPage;
@@ -220,7 +205,7 @@
         }
 
         function startTimer() {
-            let duration = (passage.duration || 30) * 60; // Default to 30 minutes if not provided
+            let duration = (passage?.duration ?? 30) * 60; // Default to 30 minutes if not provided
             timerInterval = setInterval(() => {
                 const minutes = Math.floor(duration / 60);
                 const seconds = duration % 60;
@@ -234,21 +219,25 @@
         }
 
         function sendAnswers() {
+            $('#mainContent').LoadingOverlay("show", {
+                image: "",
+                fontawesome: "fa fa-cog fa-spin",
+                background: "rgba(165, 190, 100, 0.5)"
+            });
+            $('#next').attr("disabled", true);
             clearInterval(timerInterval);
-            let user = {
-                name: $('#studentName').val().trim(),
-                email: $('#studentEmail').val().trim()
-            }
             const startTime = timeStringToSeconds(`${passage.duration}:00`);
             const endTime = timeStringToSeconds($('#timer').text());
-            answers.user = user;
             answers.grade = grade;
+            answers.student_id = student_id;
             answers.passage_id = passage.id;
+            answers.subject = passage.subject;
             answers.total_questions = allQuestions.length;
             answers.total_time = Math.abs(startTime - endTime);
+            answers.question_ids = passage.questions.map(q => q.id);
 
             $.ajax({
-                url: `/api/grade/${grade}/question`,
+                url: `/api/grade/question`,
                 method: 'POST',
                 data: JSON.stringify(answers),
                 contentType: 'application/json',
@@ -266,10 +255,14 @@
                             <p>Performance Level: <strong>${data.performance}</strong></p>
                         </div>
                     `);
+                    $('#next').attr("disabled", false);
+                    $('#mainContent').LoadingOverlay("hide");
                 },
                 error: function(xhr, status, error) {
                     console.error("Error sending answers:", error);
                     alert("Failed to submit answers. Please try again later.");
+                    $('#mainContent').LoadingOverlay("hide");
+                    $('#next').attr("disabled", false);
                 }
             });
         }

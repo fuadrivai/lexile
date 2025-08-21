@@ -41,10 +41,19 @@ class MyAuthController extends Controller
                     return redirect()->intended('/admin');
                 }
             }
-            return back()->with('LoginError', 'Login failed !');
+            return back()->with('LoginError', $response->json()['message']);
         } catch (\Throwable $th) {
-            return back()->with('LoginError', 'Something went wrong !');
+            return back()->with('LoginError', "failed to login, please try again or call support.");
         }
+    }
+
+    public function logout()
+    {
+        Session::forget('authorization');
+        Session::forget('username');
+        Session::forget('userId');
+        Session::forget('email');
+        return redirect()->route('login')->with('success', 'Logout successful !');
     }
 
     /**

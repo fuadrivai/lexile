@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Grade;
-use App\Http\Requests\StoreGradeRequest;
-use App\Http\Requests\UpdateGradeRequest;
+use App\Exports\AnswerExport;
 use App\Models\Answer;
 use App\Models\AnswerDetail;
 use App\Models\Passage;
+use App\Models\Question;
 use App\Models\Student;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class GradeController extends Controller
 {
@@ -39,29 +38,18 @@ class GradeController extends Controller
         }
     }
 
-    public function showTest()
+    public function showTest($lexile_id)
     {
 
-        $grade = request('grade_level');
+        $grade = session('grade');
+        $id = session('id');
         if (!$grade) {
             return view('404.index');
         } else {
-            $passage = Passage::where('grade', $grade)->with('questions')->first();
-
-            $perPage = 5;
-            $currentPage = LengthAwarePaginator::resolveCurrentPage();
-            $currentItems = $passage->questions->slice(($currentPage - 1) * $perPage, $perPage)->values();
-            $paginated = new LengthAwarePaginator(
-                $currentItems,
-                $passage->questions->count(),
-                $perPage,
-                $currentPage,
-                ['path' => request()->url(), 'query' => request()->query()]
-            );
             return view('reading-test.grade-test', [
-                'questions' => $paginated,
                 'grade' => $grade,
-                'passage' => $passage,
+                'passage_id' => $lexile_id,
+                'student_id' => $id
             ]);
         }
     }
@@ -152,11 +140,27 @@ class GradeController extends Controller
     {
         return view('reading-test.history');
     }
-    public function history_grade($gradeId)
+    public function history_grade(Request $request)
     {
         try {
-            $answers = Answer::with(['student'])->where('grade', $gradeId)->get();
-            return response()->json($answers);
+            $answers = Answer::with(['student'])->where('grade', $request->grade);
+            if ($request->subject != "all") {
+                $answers = $answers->where('subject', $request->subject);
+            }
+            return response()->json($answers->get());
+        } catch (\Throwable $th) {
+            return response()->json(['message' => $th->getMessage()], $th->getCode());
+        }
+    }
+    public function export_answer($gradeId, $subject)
+    {
+        try {
+            $file = Excel::raw(new AnswerExport($gradeId, $subject), \Maatwebsite\Excel\Excel::XLSX);
+
+            return response($file, 200, [
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Disposition' => 'attachment; filename="answer.xlsx"',
+            ]);
         } catch (\Throwable $th) {
             return response()->json(['message' => $th->getMessage()], $th->getCode());
         }
@@ -164,7 +168,12 @@ class GradeController extends Controller
     public function answer_detail($answerId)
     {
         try {
-            $answer = Answer::with(['student', 'passage.questions', 'details'])->find($answerId);
+            $answer = Answer::with(['student', 'details', 'passage.questions' => function ($query) use ($answerId) {
+                $answer = Answer::find($answerId);
+                if ($answer && is_array($answer->question_ids)) {
+                    $query->whereIn('id', $answer->question_ids);
+                }
+            }])->find($answerId);
             $answer->passage->questions->each->makeVisible(['correct_answer']);
             return view('reading-test.detail-answer', ['answer' => $answer]);
         } catch (\Throwable $th) {
@@ -183,23 +192,107 @@ class GradeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreGradeRequest $request)
+    public function store(Request $request)
     {
-        //
+        $id = session('id');
+        DB::beginTransaction();
+        try {
+            $passage = Passage::with('questions')->find($request->passage_id);
+            if (!$passage) {
+                return response()->json(['error' => 'Passage not found'], 404);
+            }
+            $answer = new Answer();
+            $answer->grade = $request->grade;
+            $answer->subject = $request->subject;
+            $answer->student_id = $request->student_id;
+            $answer->total_questions = $request->total_questions;
+            $answer->durations = $passage->duration;
+            $answer->total_time = $request->total_time;
+            $answer->passage_id = $request->passage_id;
+            $answer->lexile_level = $passage->lexile_level;
+            $answer->topic = $passage->topic;
+            $answer->question_ids = $request->question_ids;
+            $answer->total_answered = count($request->details);
+
+            $answer->save();
+            $correctAnswers = 0;
+
+            for ($i = 0; $i < count($request->details); $i++) {
+                $d = $request->details[$i];
+                $question = $passage->questions->firstWhere('id', $d['question']['id']);
+                $detail = new AnswerDetail();
+                $detail->answer_id = $answer->id;
+                $detail->question_id = $d['question']['id'];
+                $detail->question_text = $d['question']['question'];
+                $detail->selected_option = $d['selected_option'];
+                $detail->selected_option_text = $d['selected_option_text'];
+                $detail->correct_option = $question->correct_answer;
+                $option = 'option_' . strtolower($question->correct_answer);
+                $detail->correct_option_text = $question->$option;
+                $detail->is_correct = $d['selected_option'] == $question->correct_answer;
+                if ($detail->is_correct) {
+                    $correctAnswers++;
+                }
+                $detail->save();
+            }
+
+            $percent = ($correctAnswers / $answer->total_questions) * 100;
+            $estimatedLexile = null;
+            $performanceLevel = null;
+
+            if ($percent >= 90) {
+                $estimatedLexile = $answer->lexile_level + 150;
+                $performanceLevel = "Mastery";
+            } elseif ($percent >= 80) {
+                $estimatedLexile = $answer->lexile_level + 75;
+                $performanceLevel = "Proficient";
+            } elseif ($percent >= 65) {
+                $estimatedLexile = $answer->lexile_level;
+                $performanceLevel = "At Grade Level";
+            } elseif ($percent >= 50) {
+                $estimatedLexile = $answer->lexile_level - 100;
+                $performanceLevel = "Struggling";
+            } else {
+                $estimatedLexile = $answer->lexile_level - 200;
+                $performanceLevel = "Frustration Level";
+            }
+            $estimatedLexile = max($estimatedLexile, $passage->min_lexile);
+            $answer->update([
+                'score' => $percent,
+                'performance' => $performanceLevel,
+                'estimated_lexile' => $estimatedLexile,
+                'correct_answers' => $correctAnswers,
+            ]);
+
+            DB::commit();
+            return response()->json($answer->refresh(), 201);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json(['error' => 'Something went wrong.', 'message' => $th->getMessage()], 500);
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Grade $grade)
+    public function show($passage_id)
     {
-        //
+        try {
+            $passage = Passage::with([
+                'questions' => function ($query) {
+                    $query->inRandomOrder()->limit(20);
+                }
+            ])->find($passage_id);
+            return response()->json($passage);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage() ?: 'Passage not found'], $e->getCode() ?: 404);
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Grade $grade)
+    public function edit($grade)
     {
         //
     }
@@ -207,7 +300,7 @@ class GradeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateGradeRequest $request, Grade $grade)
+    public function update(Request $request, $grade)
     {
         //
     }
@@ -215,7 +308,7 @@ class GradeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Grade $grade)
+    public function destroy($grade)
     {
         //
     }

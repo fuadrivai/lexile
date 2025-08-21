@@ -20,4 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::get('/grade/{grade}/question', [App\Http\Controllers\GradeController::class, 'getQuestion']);
+Route::get('/grade/question/{passage_id}', [App\Http\Controllers\GradeController::class, 'show']);
+Route::post('/grade/question', [App\Http\Controllers\GradeController::class, 'store']);
 Route::post('/grade/{grade}/question', [App\Http\Controllers\GradeController::class, 'postAnswer']);

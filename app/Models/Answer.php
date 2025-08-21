@@ -16,6 +16,7 @@ class Answer extends Model
 
     protected $casts = [
         'is_passed' => 'boolean',
+        'question_ids' => 'array',
     ];
 
     public function details()

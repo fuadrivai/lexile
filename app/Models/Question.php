@@ -11,6 +11,7 @@ class Question extends Model
     protected $guarded = ['id'];
 
     protected $hidden = [
+        'correct_answer_text',
         'correct_answer',
         'passage_id'
     ];

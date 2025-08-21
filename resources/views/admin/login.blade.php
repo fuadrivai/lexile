@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Login Form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .divider:after,
@@ -48,6 +48,9 @@
                             <input required type="password" name="password" id="password"
                                 class="form-control form-control-lg" placeholder="Enter password" />
                         </div>
+                        @if (session()->has('LoginError'))
+                            <p class="text-danger">{{ session('LoginError') }}</p>
+                        @endif
                         <button class="btn btn-primary btn-lg w-100" type="submit">Login</button>
                     </form>
                 </div>
@@ -56,40 +59,6 @@
 
     </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script>
-        $(document).ready(function() {
-            // $('#form-login').on('submit', function(e) {
-            //     e.preventDefault();
-            //     login();
-            //     console.log("ok")
-            // });
-
-        })
-
-        function login() {
-            let body = {
-                "email": $('#email').val(),
-                "password": $('#password').val(),
-                "device": "web-lexile",
-                "device_id": "--"
-            }
-            $.ajax({
-                url: `https://mhis-hub.mhis.link/api/login`,
-                method: 'POST',
-                data: JSON.stringify(body),
-                contentType: 'application/json',
-                dataType: 'json',
-                success: function(data) {
-                    console.log(data)
-                },
-                error: function(xhr, status, error) {
-                    console.error("Error sending answers:", error);
-                    alert("Failed to submit answers. Please try again later.");
-                }
-            });
-        }
-    </script>
 </body>
 
 </html>

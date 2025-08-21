@@ -1,0 +1,405 @@
+{
+  "passage": "Grade 11 Recall Factual Fluency Test: Indices, quadratics, functions, trigonometry, calculus, vectors, exponentials, differentiation, and integration based on Pearson Edexcel curriculum.",
+  "questions": [
+    {
+      "question": "Simplify (x³)(x²).",
+      "topic": "Indices",
+      "option_A": "x⁵",
+      "option_B": "x⁶",
+      "option_C": "x⁸",
+      "option_D": "x⁹",
+      "correct_answer": "A",
+      "correct_answer_text": "x⁵"
+    },
+    {
+      "question": "Solve x² − 5x + 6 = 0.",
+      "topic": "Quadratics",
+      "option_A": "x = 2 or 3",
+      "option_B": "x = 1 or 6",
+      "option_C": "x = −2 or −3",
+      "option_D": "x = 0 or 6",
+      "correct_answer": "A",
+      "correct_answer_text": "x = 2 or 3"
+    },
+    {
+      "question": "If f(x) = 2x + 3, what is f(4)?",
+      "topic": "Functions",
+      "option_A": "11",
+      "option_B": "8",
+      "option_C": "7",
+      "option_D": "12",
+      "correct_answer": "A",
+      "correct_answer_text": "11"
+    },
+    {
+      "question": "What is sin 90°?",
+      "topic": "Trigonometry",
+      "option_A": "1",
+      "option_B": "0",
+      "option_C": "√3/2",
+      "option_D": "1/2",
+      "correct_answer": "A",
+      "correct_answer_text": "1"
+    },
+    {
+      "question": "Differentiate x².",
+      "topic": "Calculus",
+      "option_A": "2x",
+      "option_B": "x",
+      "option_C": "x²",
+      "option_D": "2",
+      "correct_answer": "A",
+      "correct_answer_text": "2x"
+    },
+    {
+      "question": "Find the magnitude of vector (3, 4).",
+      "topic": "Vectors",
+      "option_A": "5",
+      "option_B": "7",
+      "option_C": "12",
+      "option_D": "25",
+      "correct_answer": "A",
+      "correct_answer_text": "5"
+    },
+    {
+      "question": "Simplify e⁰.",
+      "topic": "Exponentials",
+      "option_A": "1",
+      "option_B": "0",
+      "option_C": "e",
+      "option_D": "Undefined",
+      "correct_answer": "A",
+      "correct_answer_text": "1"
+    },
+    {
+      "question": "∫ 2x dx equals?",
+      "topic": "Integration",
+      "option_A": "x² + C",
+      "option_B": "2x² + C",
+      "option_C": "ln(x) + C",
+      "option_D": "2x + C",
+      "correct_answer": "A",
+      "correct_answer_text": "x² + C"
+    },
+    {
+      "question": "Simplify (x⁴) ÷ (x²).",
+      "topic": "Indices",
+      "option_A": "x²",
+      "option_B": "x⁶",
+      "option_C": "x",
+      "option_D": "x⁸",
+      "correct_answer": "A",
+      "correct_answer_text": "x²"
+    },
+    {
+      "question": "Solve x² = 9.",
+      "topic": "Quadratics",
+      "option_A": "x = ±3",
+      "option_B": "x = 9",
+      "option_C": "x = −9",
+      "option_D": "x = 0",
+      "correct_answer": "A",
+      "correct_answer_text": "x = ±3"
+    },
+    {
+      "question": "If f(x) = x², what is f(3)?",
+      "topic": "Functions",
+      "option_A": "9",
+      "option_B": "6",
+      "option_C": "3",
+      "option_D": "27",
+      "correct_answer": "A",
+      "correct_answer_text": "9"
+    },
+    {
+      "question": "What is cos 0°?",
+      "topic": "Trigonometry",
+      "option_A": "1",
+      "option_B": "0",
+      "option_C": "√3/2",
+      "option_D": "1/2",
+      "correct_answer": "A",
+      "correct_answer_text": "1"
+    },
+    {
+      "question": "Differentiate 3x³.",
+      "topic": "Differentiation",
+      "option_A": "9x²",
+      "option_B": "3x²",
+      "option_C": "x³",
+      "option_D": "6x",
+      "correct_answer": "A",
+      "correct_answer_text": "9x²"
+    },
+    {
+      "question": "What is the dot product of (1, 2) and (3, 4)?",
+      "topic": "Vectors",
+      "option_A": "11",
+      "option_B": "14",
+      "option_C": "7",
+      "option_D": "12",
+      "correct_answer": "A",
+      "correct_answer_text": "11"
+    },
+    {
+      "question": "Simplify e¹.",
+      "topic": "Exponentials",
+      "option_A": "e",
+      "option_B": "1",
+      "option_C": "0",
+      "option_D": "Undefined",
+      "correct_answer": "A",
+      "correct_answer_text": "e"
+    },
+    {
+      "question": "∫ 1/x dx equals?",
+      "topic": "Integration",
+      "option_A": "ln|x| + C",
+      "option_B": "1/x + C",
+      "option_C": "x + C",
+      "option_D": "x² + C",
+      "correct_answer": "A",
+      "correct_answer_text": "ln|x| + C"
+    },
+    {
+      "question": "Simplify (x²)³.",
+      "topic": "Indices",
+      "option_A": "x⁵",
+      "option_B": "x⁶",
+      "option_C": "x⁸",
+      "option_D": "x⁹",
+      "correct_answer": "B",
+      "correct_answer_text": "x⁶"
+    },
+    {
+      "question": "Solve x² + 4x + 4 = 0.",
+      "topic": "Quadratics",
+      "option_A": "x = −2",
+      "option_B": "x = 2",
+      "option_C": "x = −4",
+      "option_D": "x = 0",
+      "correct_answer": "A",
+      "correct_answer_text": "x = −2"
+    },
+    {
+      "question": "If f(x) = x² + 1, what is f(2)?",
+      "topic": "Functions",
+      "option_A": "5",
+      "option_B": "4",
+      "option_C": "3",
+      "option_D": "2",
+      "correct_answer": "A",
+      "correct_answer_text": "5"
+    },
+    {
+      "question": "What is tan 45°?",
+      "topic": "Trigonometry",
+      "option_A": "0",
+      "option_B": "1",
+      "option_C": "√3",
+      "option_D": "1/√3",
+      "correct_answer": "B",
+      "correct_answer_text": "1"
+    },
+    {
+      "question": "Differentiate 5x².",
+      "topic": "Differentiation",
+      "option_A": "5x",
+      "option_B": "10x",
+      "option_C": "x²",
+      "option_D": "25x",
+      "correct_answer": "B",
+      "correct_answer_text": "10x"
+    },
+    {
+      "question": "Find the unit vector of (3, 4).",
+      "topic": "Vectors",
+      "option_A": "(3/5, 4/5)",
+      "option_B": "(4/3, 3/5)",
+      "option_C": "(1/3, 1/4)",
+      "option_D": "(5, 5)",
+      "correct_answer": "A",
+      "correct_answer_text": "(3/5, 4/5)"
+    },
+    {
+      "question": "Simplify e² × e³.",
+      "topic": "Exponentials",
+      "option_A": "e⁶",
+      "option_B": "e⁵",
+      "option_C": "e¹",
+      "option_D": "e",
+      "correct_answer": "B",
+      "correct_answer_text": "e⁵"
+    },
+    {
+      "question": "∫ 3x² dx equals?",
+      "topic": "Integration",
+      "option_A": "x³ + C",
+      "option_B": "3x³ + C",
+      "option_C": "x² + C",
+      "option_D": "6x + C",
+      "correct_answer": "A",
+      "correct_answer_text": "x³ + C"
+    },
+    {
+      "question": "Simplify (y⁵)(y³).",
+      "topic": "Indices",
+      "option_A": "y²",
+      "option_B": "y⁸",
+      "option_C": "y¹⁵",
+      "option_D": "y⁵",
+      "correct_answer": "B",
+      "correct_answer_text": "y⁸"
+    },
+    {
+      "question": "Solve x² − 16 = 0.",
+      "topic": "Quadratics",
+      "option_A": "x = ±4",
+      "option_B": "x = ±8",
+      "option_C": "x = 16",
+      "option_D": "x = 0",
+      "correct_answer": "A",
+      "correct_answer_text": "x = ±4"
+    },
+    {
+      "question": "If f(x) = 3x − 2, find f(5).",
+      "topic": "Functions",
+      "option_A": "13",
+      "option_B": "12",
+      "option_C": "11",
+      "option_D": "10",
+      "correct_answer": "A",
+      "correct_answer_text": "13"
+    },
+    {
+      "question": "What is cos 90°?",
+      "topic": "Trigonometry",
+      "option_A": "1",
+      "option_B": "0",
+      "option_C": "1/2",
+      "option_D": "√3/2",
+      "correct_answer": "B",
+      "correct_answer_text": "0"
+    },
+    {
+      "question": "Differentiate 7x⁴.",
+      "topic": "Differentiation",
+      "option_A": "28x³",
+      "option_B": "7x³",
+      "option_C": "4x⁷",
+      "option_D": "21x²",
+      "correct_answer": "A",
+      "correct_answer_text": "28x³"
+    },
+    {
+      "question": "What is the cross product of (1, 0, 0) and (0, 1, 0)?",
+      "topic": "Vectors",
+      "option_A": "(0, 0, 1)",
+      "option_B": "(1, 1, 0)",
+      "option_C": "(0, 0, −1)",
+      "option_D": "(1, 0, 1)",
+      "correct_answer": "A",
+      "correct_answer_text": "(0, 0, 1)"
+    },
+    {
+      "question": "Simplify e³ ÷ e².",
+      "topic": "Exponentials",
+      "option_A": "e",
+      "option_B": "1",
+      "option_C": "e²",
+      "option_D": "e³",
+      "correct_answer": "A",
+      "correct_answer_text": "e"
+    },
+    {
+      "question": "∫ 4 dx equals?",
+      "topic": "Integration",
+      "option_A": "4x + C",
+      "option_B": "x⁴ + C",
+      "option_C": "ln(x) + C",
+      "option_D": "x + C",
+      "correct_answer": "A",
+      "correct_answer_text": "4x + C"
+    },
+    {
+      "question": "Simplify (2x³)².",
+      "topic": "Indices",
+      "option_A": "4x⁶",
+      "option_B": "2x⁶",
+      "option_C": "x⁹",
+      "option_D": "8x⁵",
+      "correct_answer": "A",
+      "correct_answer_text": "4x⁶"
+    },
+    {
+      "question": "Solve x² − x − 6 = 0.",
+      "topic": "Quadratics",
+      "option_A": "x = 3 or −2",
+      "option_B": "x = 2 or −3",
+      "option_C": "x = 1 or 6",
+      "option_D": "x = 0 or −6",
+      "correct_answer": "A",
+      "correct_answer_text": "x = 3 or −2"
+    },
+    {
+      "question": "If f(x) = √x, what is f(9)?",
+      "topic": "Functions",
+      "option_A": "3",
+      "option_B": "9",
+      "option_C": "81",
+      "option_D": "1/3",
+      "correct_answer": "A",
+      "correct_answer_text": "3"
+    },
+    {
+      "question": "What is sin 0°?",
+      "topic": "Trigonometry",
+      "option_A": "1",
+      "option_B": "0",
+      "option_C": "1/2",
+      "option_D": "√3/2",
+      "correct_answer": "B",
+      "correct_answer_text": "0"
+    },
+    {
+      "question": "Differentiate x⁵.",
+      "topic": "Differentiation",
+      "option_A": "5x⁴",
+      "option_B": "x⁴",
+      "option_C": "x⁵",
+      "option_D": "4x³",
+      "correct_answer": "A",
+      "correct_answer_text": "5x⁴"
+    },
+    {
+      "question": "Find the angle between vectors (1, 0) and (0, 1).",
+      "topic": "Vectors",
+      "option_A": "0°",
+      "option_B": "45°",
+      "option_C": "90°",
+      "option_D": "180°",
+      "correct_answer": "C",
+      "correct_answer_text": "90°"
+    },
+    {
+      "question": "Simplify ln(e).",
+      "topic": "Exponentials",
+      "option_A": "0",
+      "option_B": "e",
+      "option_C": "1",
+      "option_D": "Undefined",
+      "correct_answer": "C",
+      "correct_answer_text": "1"
+    },
+    {
+      "question": "∫ x dx equals?",
+      "topic": "Integration",
+      "option_A": "x²/2 + C",
+      "option_B": "x² + C",
+      "option_C": "2x + C",
+      "option_D": "ln(x) + C",
+      "correct_answer": "A",
+      "correct_answer_text": "x²/2 + C"
+    }
+  ]
+}
