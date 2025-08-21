@@ -83,8 +83,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="/lexile-2/assets/js/plugin/webfont/webfont.min.js"></script>
-    <script src="/lexile-2/assets/js/plugin/jquery-loading-overlay/loadingoverlay.min.js"></script>
+    <script src="/lexile/assets/js/plugin/webfont/webfont.min.js"></script>
+    <script src="/lexile/assets/js/plugin/jquery-loading-overlay/loadingoverlay.min.js"></script>
     <script>
         let allQuestions = [];
         let currentPage = 1;
@@ -141,7 +141,7 @@
                 background: "rgba(165, 190, 100, 0.5)"
             });
             $.ajax({
-                url: `/lexile-2/api/grade/question/${passage_id}`,
+                url: `/lexile/api/grade/question/${passage_id}`,
                 method: 'GET',
                 dataType: 'json',
                 success: function(data) {
@@ -237,7 +237,7 @@
             answers.question_ids = passage.questions.map(q => q.id);
 
             $.ajax({
-                url: `/lexile-2/api/grade/question`,
+                url: `/lexile/api/grade/question`,
                 method: 'POST',
                 data: JSON.stringify(answers),
                 contentType: 'application/json',

@@ -259,7 +259,7 @@
 
                         <div class="text-center mt-4">
                             <button class="btn btn-reading btn-assessment"
-                                onclick="window.location.href='/lexile-2/reading/test/{{ $lexile->id }}'">
+                                onclick="window.location.href='/lexile/reading/test/{{ $lexile->id }}'">
                                 <i class="fas fa-play me-2"></i> Start Reading Test
                             </button>
                         </div>
@@ -292,7 +292,7 @@
 
                             <div class="text-center mt-4">
                                 <button class="btn btn-math btn-assessment"
-                                    onclick="window.location.href='/lexile-2/math/test/{{ $math->id ?? '0' }}'">
+                                    onclick="window.location.href='/lexile/math/test/{{ $math->id ?? '0' }}'">
                                     <i class="fas fa-play me-2"></i> Start Math Test
                                 </button>
                             </div>
